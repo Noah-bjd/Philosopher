@@ -54,7 +54,7 @@ int init(int ac, char **av, t_info *input)
             if (input->n_eat < 1)
                 return(printf("inputs > 0"), 1);
         }
-    if(mutex(input))
-        return(1);
+    // if(mutex(input))
+    //     return(1);
     return(0);
 }

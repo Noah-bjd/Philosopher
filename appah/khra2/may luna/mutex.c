@@ -7,8 +7,12 @@ void get_philo(t_info *input)
     while(--i >= 0)
     {
         input->philo[i].id = i;
-        input->philo[i].
+        input->philo[i].ate = 0;
+        input->philo[i].info = input;
+        input->philo[i].full = false;
+        input->philo[i].last_meal = input->start;
     }
+    return ;
 }
 int mutex(t_info *input)
 {

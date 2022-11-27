@@ -3,6 +3,8 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/time.h>
+#include <stdbool.h>
 typedef struct philo
 {
     pthread_t           philo;
@@ -10,6 +12,8 @@ typedef struct philo
     long                last_meal;
     pthread_mutex_t     fork[200];
     int                 ate;
+    bool                full;
+    struct input        *info;
 }t_philo;
 typedef struct info
 {
