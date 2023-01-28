@@ -6,26 +6,11 @@
 /*   By: nbouljih <nbouljih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 19:02:03 by nbouljih          #+#    #+#             */
-/*   Updated: 2023/01/01 19:37:26 by nbouljih         ###   ########.fr       */
+/*   Updated: 2023/01/22 23:44:25 by nbouljih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	decimal(char *av)
-{
-	int	i;
-
-	i = 0;
-	while (av[i])
-	{
-		if (av[i] >= '0' && av[i] <= '9')
-			i++;
-		else
-			return (1);
-	}
-	return (0);
-}
 
 int	ft_atoi(char *str)
 {
@@ -46,32 +31,8 @@ int	ft_atoi(char *str)
 	return (res);
 }
 
-void	check_5(char **av, t_info **input)
+int	init(char **av, t_info **input, t_philo **philo)
 {
-	if (av[5])
-	{
-		(*input)->must = ft_atoi(av[5]);
-		if ((*input)->must < 1)
-		{	
-			printf("inputs > 1");
-			return ;
-		}
-	}
-	else
-		(*input)->must = -1;
-}
-
-int	init(int ac, char **av, t_info **input, t_philo **philo)
-{
-	int	i;
-
-	i = 1;
-	while (i < ac)
-	{
-		if (decimal(av[i]))
-			return (1);
-		i++;
-	}
 	(*input) = malloc(sizeof(t_info));
 	(*input)->np = ft_atoi(av[1]);
 	(*input)->die = ft_atoi(av[2]);
@@ -79,12 +40,20 @@ int	init(int ac, char **av, t_info **input, t_philo **philo)
 	(*input)->sleep = ft_atoi(av[4]);
 	(*input)->start_time = get_time();
 	(*input)->full = 0;
-	if ((*input)->eat < 0 || (*input)->np < 1 || \
-			(*input)->die < 0 || (*input)->sleep < 0)
-		return (printf("inputs > 0"), 1);
-	check_5(av, input);
+	if ((*input)->eat <= 0 || (*input)->np < 1 || \
+			(*input)->die <= 0 || (*input)->sleep <= 0)
+		return (printf("%sInputs must be greater than 0\n", AC_YELLOW), 1);
+	if (av[5])
+	{
+		(*input)->must = ft_atoi(av[5]);
+		if ((*input)->must < 1)
+			return (printf("%sInputs must be greater than"
+					"or equal than 1\n", AC_YELLOW), 1);
+	}
+	else
+		(*input)->must = -1;
 	(*philo) = fill_info(*input);
 	if (!philo)
-		return (printf("\nERROR philo\n"), 1);
+		return (printf("%sERROR Philo\n", AC_YELLOW), 1);
 	return (0);
 }

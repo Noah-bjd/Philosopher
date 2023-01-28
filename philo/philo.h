@@ -6,7 +6,7 @@
 /*   By: nbouljih <nbouljih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 19:31:12 by nbouljih          #+#    #+#             */
-/*   Updated: 2023/01/01 20:14:12 by nbouljih         ###   ########.fr       */
+/*   Updated: 2023/01/22 23:44:38 by nbouljih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <sys/time.h>
 # include <stdlib.h>
 # include <unistd.h>
+# define AC_RED "\x1b[31m"
+# define AC_YELLOW "\x1b[33m"
 
 typedef struct s_info
 {
@@ -44,7 +46,7 @@ typedef struct s_philo
 	struct s_philo	*previous;
 }	t_philo;
 
-int		init(int ac, char **av, t_info **input, t_philo **philo);
+int		init(char **av, t_info **input, t_philo **philo);
 t_philo	*fill_info(t_info *input);
 void	pointeur(t_philo **up, t_philo *new);
 long	get_time(void);

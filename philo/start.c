@@ -6,7 +6,7 @@
 /*   By: nbouljih <nbouljih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 19:22:54 by nbouljih          #+#    #+#             */
-/*   Updated: 2023/01/01 19:37:19 by nbouljih         ###   ########.fr       */
+/*   Updated: 2023/01/23 00:48:53 by nbouljih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,13 @@ void	*routin(t_philo *philo)
 int	start(t_philo *top)
 {
 	int		i;
-	t_philo	*philo;
 
 	i = 1;
-	philo = top;
 	while (i <= top->info->np)
 	{
-		if (pthread_create(&(philo->thread), NULL, (void *)routin, philo))
+		if (pthread_create(&(top->thread), NULL, (void *)routin, top))
 			return (1);
-		philo = philo->next;
+		top = top->next;
 		usleep(100);
 		i++;
 	}

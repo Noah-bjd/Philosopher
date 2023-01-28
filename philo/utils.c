@@ -6,7 +6,7 @@
 /*   By: nbouljih <nbouljih@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 19:27:28 by nbouljih          #+#    #+#             */
-/*   Updated: 2023/01/01 20:13:52 by nbouljih         ###   ########.fr       */
+/*   Updated: 2023/01/23 00:30:59 by nbouljih         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	chill(long time)
 void	msg(long time, t_philo *philo, char *str)
 {
 	pthread_mutex_lock(&philo->info->write);
+	printf("\033[0;32m");
 	printf("%ld %d %s", time, philo->id, str);
 	pthread_mutex_unlock(&philo->info->write);
 }
@@ -63,16 +64,4 @@ void	pointeur(t_philo **up, t_philo *new)
 	new->next = *up;
 	((*up)->previous)->next = new;
 	(*up)->previous = new;
-}
-
-void ft_free(t_philo *head)
-{
-   t_philo	*tmp;
-
-   while (head != NULL)
-    {
-       tmp = head;
-       head = head->next;
-       free(tmp);
-    }
 }
